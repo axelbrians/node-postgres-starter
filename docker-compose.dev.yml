@@ -9,9 +9,9 @@ services:
         NODE_ENV: development
 
     volumes:
-      # mean we will dump directories ./src into /app/src in container
+      # bind volume ./src into /app/src in container
       - ./src:/app/src
-      # we wont dump to /app/node_modules
+      # anonymous voulume
       - /app/node_modules
 
     environment:
