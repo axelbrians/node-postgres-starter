@@ -1,0 +1,14 @@
+version: "3"
+services:
+  node-app:
+    build:
+      # path of Dockerfile
+      context: .
+      # pass argument to Dockerfile later
+      args:
+        NODE_ENV: production
+
+    environment:
+      - NODE_ENV=production
+    # this command will override CMD in Dockerfile
+    command: npm run prod
