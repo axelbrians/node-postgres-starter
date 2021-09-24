@@ -1,7 +1,6 @@
 version: "3"
 services:
 
-
   node-app:
     build: .
     ports:
@@ -12,12 +11,21 @@ services:
 
   postgres:
     image: postgres
+    # define environtment for pg images, self-explanatory
     environment:
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=postgres
+    # define named volumes to store data of postgres
+    # so its survive when container is stopped
+    volumes:
+      - postgres-db:/data/db
 
 
   adminer:
     image: adminer
     ports:
       - "8080:8080"
+
+
+volumes:
+  postgres-db:
