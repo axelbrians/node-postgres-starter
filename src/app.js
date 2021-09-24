@@ -3,15 +3,17 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const { Pool } = require('pg');
+const { POSTGRES_USER, POSTGRES_IP, POSTGRES_PASSWORD, POSTGRES_PORT } = require('../config/config');
+
 const pool = new Pool({
-  user: 'postgres', // user env at docker-compose
-  host: '172.18.0.2', // check your pg container ip address
+  user: `${POSTGRES_USER}`, // user env at docker-compose
+  host: `${POSTGRES_IP}`, // pg service name
   database: 'marketplace', // default db name at pg container
-  password: 'postgres', //password eng from docker-compose
-  port: 5432, // port address
+  password: `${POSTGRES_PASSWORD}`, //password eng from docker-compose
+  port: `${POSTGRES_PORT}`, // port address
 });
 
-;(async () => {
+(async () => {
   const client = await pool.connect()
   try {
     const res = await client.query('SELECT NOW()');
@@ -25,7 +27,7 @@ const pool = new Pool({
 })().catch(err => console.log(err.stack))
 
 app.get('/', (req, res) => {
-  res.send('docker-compose with pg!!');
+  res.send('docker-compose with pg and dns!!');
 });
 
 app.listen(port, () => {
