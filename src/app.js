@@ -8,7 +8,7 @@ const { POSTGRES_USER, POSTGRES_IP, POSTGRES_PASSWORD, POSTGRES_PORT } = require
 const pool = new Pool({
   user: `${POSTGRES_USER}`, // user env at docker-compose
   host: `${POSTGRES_IP}`, // pg service name
-  database: 'marketplace', // default db name at pg container
+  database: 'postgres', // default db name at pg container
   password: `${POSTGRES_PASSWORD}`, //password eng from docker-compose
   port: `${POSTGRES_PORT}`, // port address
 });
@@ -17,14 +17,14 @@ const pool = new Pool({
   const client = await pool.connect()
   try {
     const res = await client.query('SELECT NOW()');
-    console.log(res.rows[0])
+    console.log(`connected to postgres at ${res.rows[0]}`)
     // will log current time if success
   } finally {
     // Make sure to release the client before any error handling,
     // just in case the error handling itself throws an error.
     client.release()
   }
-})().catch(err => console.log(err.stack))
+})().catch(err => console.log(err.stack));
 
 app.get('/', (req, res) => {
   res.send('docker-compose with pg and dns!!');

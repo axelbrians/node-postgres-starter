@@ -1,22 +1,17 @@
 # Dockerized Node Postgress Starter Template
 
 ## How To
-- Run in dev
+- Run
 ```
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+docker-compose -f docker-compose.yml -f docker-compose.<dev/prod>.yml up -d
 ```
-- Stop in dev
+- Stop
 ```
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml down
-```
-
-
-- Run in prod
-```
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker-compose -f docker-compose.yml -f docker-compose.<dev/prod>.yml down
 ```
 
-- Stop in prod
+Dont forget to run 
 ```
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml down -v
+docker-compose -f docker-compose.yml -f docker-compose.<dev/prod>.yml up -d --build
 ```
+everytime changes made to any of dockerfile. --build force docker-compose to build new image with new configuration.

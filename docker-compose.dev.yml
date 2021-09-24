@@ -20,17 +20,5 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       
-
     # this command will override CMD in Dockerfile
     command: npm run dev
-
-
-  postgres:
-    # define environtment for pg images, self-explanatory
-    environment:
-      - POSTGRES_USERNAME=postgres
-      - POSTGRES_PASSWORD=postgres
-    # define named volumes to store data of postgres
-    # so its survive when container is stopped
-    volumes:
-      - postgres-db:/data/db
